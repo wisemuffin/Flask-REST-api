@@ -16,11 +16,6 @@ app.secret_key = 'dave@whatgogu15bonus65fgfdn'
 api = Api(app)
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()  # creates based on SQLALCHEMY_DATABASE_URI
-
-
 jwt = JWT(app, authenticate, identity)  # creates a new endpoint /auth
 
 # config JWT to expire within half an hour
