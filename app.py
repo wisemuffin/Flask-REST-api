@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT  # jason web token, and a decorator for JWT
@@ -10,7 +12,8 @@ from resources.store import Store, StoreList
 
 app = Flask(__name__)
 # sqllite db exists in the root folder. This could be mysql or oracle or postgress or any other db :)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.grey(
+    'DATABASE_URL', 'sqlite:///data.db')  # if no DB variable then use sqllite
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'dave@whatgogu15bonus65fgfdn'
 api = Api(app)
